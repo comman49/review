@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Pop-up</title>
+<script type="text/javascript">
+	window.addEventListener("load", function() {
+	/* var btnPopupShow = document.getElementById("btn-popup-show"); */
+	var btnPopupShow = document.querySelector("#btn-popup-show");
+		btnPopupShow.onclick = function() {
+			var screen = document.createElement("div");
+			screen.style.position = "fixed";
+			screen.style.background = "black";
+			screen.style.width = "100%";
+			screen.style.height = "100%";
+			screen.style.opacity = "0.4";
+			screen.style.top = "0px";
+			screen.style.left = "0px";
+			document.body.appendChild(screen);
+			
+			var dialog = document.createElement("div");
+			var docWidth = window.innerWidth;
+			var docHeight = window.innerHeight;
+			var width = 500;
+			var height = 300;
+			dialog.style.position = "fixed";
+			dialog.style.width = width + "px";
+			dialog.style.height = height + "px";
+			dialog.style.background = "white";
+			dialog.style.left = (docWidth - width) / 2 + "px";
+			dialog.style.top = (docHeight - height) / 2 + "px";
+			document.body.appendChild(dialog);
+			
+			var view = document.createElement("div");
+			dialog.appendChild(view);
+			
+			/* ------------------------버튼 생성------------------------ */
+			var closeBtn = document.createElement("input");
+			closeBtn.type = "button";
+			closeBtn.value = "닫기";
+			closeBtn.style.position = "absolute";
+			closeBtn.style.left = width / 2 + "px";
+			closeBtn.style.bottom = "-10px";
+			closeBtn.onclick = function() {
+				document.body.removeChild(screen);
+				document.body.removeChild(dialog);
+			}
+			dialog.appendChild(closeBtn);
+			
+			/* ------------------------페이지 불러오기------------------------ */
+			var request = new window.XMLHttpRequest();
+			request.open("GET", "partial1.jsp", false);
+			request.send(null);
+			view.innerHTML = request.responseText;
+		};
+		
+	});
+</script>
+</head>
+<body>
+	<input type="button" value="팝업!" id="btn-popup-show">
+</body>
+</html>

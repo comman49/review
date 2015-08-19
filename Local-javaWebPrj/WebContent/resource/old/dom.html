@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom</title>
+<script type="text/javascript">
+	window.addEventListener("load", function() {
+		/* body의 첫번째 childNode를 선택하여 값을 hello라고 줌 */
+		/* document.body.childNodes[0].value = "hello"; */
+		
+		/* childNode의 갯수를 확인 */
+		/* var size = document.body.childNodes.length;
+		var nodes = document.body.childNodes; */
+		
+		/* 노드의 종류를 차례로 출력 */
+		/* for (var i = 0; i < size; i++) {
+			alert(nodes[i].nodeType);
+		} */
+		
+		var photos = document.getElementById("photos");
+		
+		/* 특정 태그만 찾아서 선택해주는 메소드 */
+		/* img라는 태그만 찾아서 걸러줌 */
+		var items = photos.getElementsByTagName("img");
+		var btnImgChange1 = document.getElementById("btn-img-change1");
+		var btnImgChange2 = document.getElementById("btn-img-change2");
+		var btnAddText = document.getElementById("btn-add-text");
+		var btnAddImg = document.getElementById("btn-add-img");
+		var btnDelChild = document.getElementById("btn-del-child");
+		var btnCloneChild = document.getElementById("btn-clone-child");
+
+		
+		
+		/* for (var i = 0; i < items.length; i++) {
+			items[i].src = "https://pbs.twimg.com/profile_images/1202364091/logo_400x400.jpg";
+			items[i].width = "250";
+		} */
+		
+		/*btnImgChange1.onclick = function() {
+			var txtImage = docment.getElementsById("txt-img");
+			items[0].src = "images/"+txtImage.value;
+			/* items[0].style.border = "2px solid pink";
+			items[0].style.width = "200px"; */
+			/* for (var i = 0; i < items.length; i++) {
+				items[i].src = "images/"+txtImage.value;
+			};
+		}; */
+
+		btnImgChange1.onclick = function() {
+			var txtImage = document.getElementById("txt-img");
+			items[0].src = "images/" + txtImage.value;
+		};
+
+		btnImgChange2.onclick = function() {
+			var comboImage = document.getElementById("combo-img");
+			items[0].src = "images/" + comboImage.value;
+			items[0].style.width = "500px";
+			items[0].style.border = "5px solid pink";
+			items[0].style.borderWidth = "10px";
+		};
+		
+		
+		/* 클릭시 텍스트 추가 */
+		btnAddText.onclick = function() {
+			var parent = photos.getElementsByTagName("li")[0];
+			
+			/* 텍스트 노드를 생성 */
+			var text = document.createTextNode("안녕하세요");
+			
+			/* 부모에게 자식노드를 추가하는 작업 */
+			parent.appendChild(text);
+		};
+		var photos = document.getElementById("photos");
+		var items = photos.getElementsByTagName("img");
+		
+		for (var i = 0; i < items.length; i++) {
+			items[i].width = "200";
+		};
+		
+		
+		/* 클릭시 이미지 추가 */
+		btnAddImg.onclick = function() {
+			var kparent = document.getElementById("photos");
+			var parent = kparent.getElementsByTagName("li");
+			
+			/* 이미지 엘리먼트 노드 생성 */
+			var img = document.createElement("img");
+			img.src = "images/fr.jpg";
+			img.width = "300"
+			parent[0].appendChild(img);
+		};
+		
+		
+		/* 클릭시 막내 제거 */
+		btnDelChild.onclick = function() {
+			var photos = document.getElementById("photos");
+			var lis = photos.getElementsByTagName("li");
+			var last = lis[0].lastChild;
+
+			/* 막내 노드 제거 */
+			lis[0].removeChild(lis[0].lastChild);
+		};
+		
+		
+		/* 클릭시 첫째 복제*/
+		btnCloneChild.onclick = function() {
+			var photos = document.getElementById("photos");
+			var lis = photos.getElementsByTagName("li");
+			
+			/* 복제할 노드 선택 */
+			var target = lis[0];
+			
+			/* 노드 복제 */
+			var cat = target.cloneNode(true);
+			
+			/* 노드 삽입 */
+			photos.appendChild(cat);
+		};
+		
+		
+		/*두 개의 노드를 서로 교체 */
+		var btnChangeNodes = document.getElementById("btn-change-nodes");
+		btnChangeNodes.onclick = function() {
+			/* ul 태그 선택 */
+			var photos = document.getElementById("photos");
+			var lis = [];
+			var boxs = photos.getElementsByTagName("input");
+			
+			/* 체크 갯수 확인 */
+			var cntChecked = 0;
+			
+			/* 노드 수만큼 반복 */
+			for (var i = 0; i < boxs.length; i++) {	
+				if(boxs[i].checked)
+					cntChecked++;
+			}
+			
+			/* 2개 선택이 아닐경우 출력 */
+			if (cntChecked != 2) {
+				alert("2개 선택하셈");
+			}
+			
+			for(var i = 0, j=0; i < boxs.length; i++)
+				if(boxs[i].checked) {
+					lis[j++] = boxs[i].parentNode;
+				}
+			
+			var node = photos.removeChild(lis[0]);
+			
+			/* photos의 마지막에 노드 추가 */
+			/* photos.appendChild(node); */
+			photos.insertBefore(node, lis[1]);
+		};
+		
+		
+
+	});
+</script>
+</head>
+<body id="body">
+	<div>
+		<ul>
+			<li>
+				images/<input id="txt-img" type="text"/>
+				<input id="btn-img-change1" type="button" value="change"/>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				images/
+				<select id="combo-img">
+					<option value="hand.png">첫번째 이미지</option>
+					<option value="hand2.png">두번째 이미지</option>
+					<option value="hand3.png">세번째 이미지</option>
+				</select>
+				<input id="btn-img-change2" type="button" value="change"/>
+			</li>
+			<li>
+				<input type="button" id="btn-add-text" value="텍스트 추가"/>
+				<input type="button" id="btn-add-img" value="이미지 추가"/>
+				<input type="button" id="btn-del-child" value="막내 제거"/>
+				<input type="button" id="btn-clone-child" value="첫째 복제"/>
+				<input type="button" id="btn-change-nodes" value="두개 교체"/>
+			</li>
+		</ul>
+	</div>
+	<ul id="photos">
+		<li><input type="checkbox" value="0"><img alt="" src="images/hand.png"></li>
+		<li><input type="checkbox" value="1"><img alt="" src="images/hand2.png"></li>
+		<li><input type="checkbox" value="2"><img alt="" src="images/hand3.png"></li>
+	</ul>
+	<input/>
+</body>
+</html>

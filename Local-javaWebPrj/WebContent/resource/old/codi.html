@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../css/reset.css" type="text/css" rel="stylesheet"/>
+<style type="text/css">
+#codi {
+	display:inline-block;
+	background: gray;
+	width: 900 px;
+	height: 600 px;
+	border: 3px red solid;
+}
+#codi h1 {
+	display: none;}
+#codi-canvas {
+	float: left;
+	width: 700px;
+	height: 600px;
+	border: 1px black solid;
+	background: pink;
+}
+#codi-box {
+	/* float: left; */
+	display: inline-block;
+	width: 200px;
+	height: 600px;
+	border: 1px black solid;
+	background: green;
+}
+#codi-box li{
+width: 150px;
+height: 150px;
+border: 2px solid black;
+background: beige;}
+#codi-box img{
+	width: 80px;}
+	#f {
+	}
+</style>
+<script type="text/javascript">
+	window.addEventListener("load", function() {
+		var codilist = document.querySelector("#codi-box ul");
+		codilist.addEventListener("click", function() {
+			alert("ttt")
+		}, true);
+		
+		/* 이벤트 순서 전환 */
+		var codibox = document.querySelector("#codi-box");
+		codibox.addEventListener("click", function(event) {
+			if(event.target.nodeName == "LI") {
+				/* data-code="1" 여기서 - 다음에 있는것을 불러내는 것 */
+				/* 본 예제에서는 code */
+				alert("target : " + event.target.dataset.code);
+				event.stopPropagation();
+			}
+			else if (event.target.nodeName == "IMG") {
+				alert("target : " + event.target.parentNode.dataset.code);
+				event.stopPropagation();
+			}
+			/* 버블링을 막는 메소드. 이 메소드가 실행되면 버블링이 전달되는 것을 차단한다 */
+			
+			/* 태그가 기본적으로 갖고있는 기능을 막는 메소드 */
+			/* a, submit과 같은 태그들은 자바스크립트를 사용해도 스크립트가 실행되고 자신의 기본적인 기능을 수행 */
+			/* 이를 막는 것이 preventDefault() */
+			//event.preventDefault();
+		}, true);
+		
+		/* 이렇게 요소 하나하나에 이벤트를 주지 않고 버블링을 사용하여 상위 태그에만 이벤트를 준다 */
+		/* var items = document.querySelector("#codi- box > ul > li);
+		for ( var i in items) {
+			items[i].onclick = function() {
+				alert("!");
+			};
+		}; */
+		/* ------------------이벤트 트리거------------------ */
+		var btnFile = document.querySelector("#button-box span");	//대체하는 글자
+		btnFile.onclick = function() {
+				var event = new MouseEvent("click", {
+					'view':window,
+					'bubbles':true,
+					'cancelable':true
+				});
+			var inputFile = document.querySelector("#button-box input");	//버튼
+			inputFile.dispatchEvent(event);
+			};
+			
+			
+			
+			
+		});
+</script>
+<meta charset="UTF-8">
+<title>코디</title>
+</head>
+<body>
+	<section id="codi">
+	<h1>나의 코디</h1>
+		<div>
+			<div id="codi-canvas">
+			</div>
+			<div id="codi-box">
+				<ul>
+					<li data-code="1"><a href="calc.html"><img alt="여기사" src="images/woman.png"></a></li>
+					<li data-code="2"><img alt="남격투가" src="images/fighter.png"> </li>
+					<li data-code="3"></li>	
+				</ul>
+			</div>
+		</div>
+		<div id="button-box">
+			<input type="file" id="f" style="display: none;"/>
+			<span style="background: pink;">파일 선택</span>
+		</div>
+	</section>
+</body>
+</html>

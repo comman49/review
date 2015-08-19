@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>inner Frame</title>
+<script type="text/javascript">
+	window.addEventListener("load", function() {
+		var btnParentClose = document.getElementById("btn-parent-close");
+		
+		/* 크롬에서만 작동 ex11에선 불가*/
+		btnParentClose.onclick = function() {
+			parent.close();
+		};
+	});
+</script>
+</head>
+<body>
+	<input type="button" value="창닫기" id="btn-parent-close"/>
+</body>
+</html>

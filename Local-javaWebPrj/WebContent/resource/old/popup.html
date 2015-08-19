@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function showDialog(url) {
+		/* ----------------------------검은 장막 만들기------------------------------- */
+		var screen	= document.createElement("div");
+		
+		/* 아래 주석은 내가 잘못 사용한 사례 */
+		/* var body = document.getElementById("body"); */
+		/* 아래 주석은 내가 잘못 사용한 사례 */
+		/* screen.style = "position:absolute; left:0px; top:0px; width:100%; height:100%; background:black; opacity:0.3"; */
+		
+		/* 문서 자체의 위치에 고정됨 */
+		/* screen.style.position = "absolute"; */
+		
+		/* 브라우저 자체의 위치에 고정됨 */
+		screen.style.position = "fixed";
+		
+		/* 태그에 옵션을 줄 때 하나하나 줘야 함 */
+ 		screen.style.left = "0px";
+		screen.style.top = "0px";
+		screen.style.height = "100%";
+		screen.style.width = "100%";
+		screen.style.background = "black";
+		screen.style.opacity = "0.3";
+
+		/* body에 screen를 붙임 */
+		document.body.appendChild(screen);
+		
+		/* 문서 내부(각종 작업표시줄은 제외한 순수 영역)을 구하는 방법 */
+		var docWidth = window.innerWidth;
+		var docHeight = window.innerHeight;
+		var width = 700;
+		var height = 500;
+		
+		/* 화면 중앙에 screen을 띄우기 위한 위치 좌표 */
+		var left = (docWidth - width) / 2;
+		var top = (docHeight - height) / 2;
+		
+		/* ----------------------------dialog 생성------------------------------- */
+		var dialog = document.createElement("div");
+		
+		/* dialog.style.position = "absolute"; */
+		dialog.style.position = "fixed";
+		dialog.style.left = left+"px";
+		dialog.style.top = top+"px";
+		dialog.style.width = "700px";
+		dialog.style.height = "500px";
+		dialog.style.background = "rgb(255, 255, 255)";
+		document.body.appendChild(dialog);
+		
+		/* 뷰 생성 */
+		var view	= document.createElement("div");
+		view.style.background = "rgb(255, 255, 255)";
+		//view.style.textAlign = "center";
+		//view.style.lineHeight= height + "px";
+		
+		dialog.appendChild(view);
+		
+		/* 로딩 이미지 */
+		var img = document.createElement("img");
+		img.src = "images/ajax-loader.gif";
+		
+		dialog.appendChild(img);
+		/* ----------------------------닫기 버튼------------------------------- */
+		var btnClose = document.createElement("input");
+		btnClose.type = "button";
+		btnClose.value = "X";
+		btnClose.style.position = "absolute";
+		btnClose.style.right = "-10px";
+		btnClose.style.top = "-10px";
+		btnClose.style.src = "images/close.png"
+		btnClose.onclick = function() {
+			document.body.removeChild(dialog);
+			document.body.removeChild(screen);
+		};
+		dialog.appendChild(btnClose);
+		
+		
+		/* ----------------------------동기형 요청------------------------------- */
+		/* 클라이언트가 서버에 있는 페이지를 불러내도록 만드는 작업 */
+		/* 시스템에 있는 엑티브 엑스를 불러냄 오로지 인터넷 익스플로러에서만 가능*/
+		/* var xhr = new ActiveXObject(""); */
+		
+		/* 모든 브라우저에서 사용 가능한 도구 */
+		var request = new window.XMLHttpRequest();
+		
+		/* 주소창에 쓰는 작업이 open. 페이지든 문자열이든 상관 없다. */
+		/* 기본은 비동기형이나 false를 줘서 동기형으로 바꿀 수 있음 */ 
+		request.open("GET", url, true);
+		request.send(null);
+		
+		/* open이 false일 때는 alert에 text가 들어갈 동안 기다리지만 true에서는 기다리지 않고
+		동시에 실행하기 때문에 오류가 발생한다. */
+		/* alert(request.responseText); */
+
+		/* ----------------------------비동기형 요청------------------------------- */
+		/* 그래서 request.send가 완료 된 후 alert이 완료되어야한다. */
+		/* 아래 함수와 관련된 사이트 : https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#open() */
+		request.onreadystatechange = function() {
+			if(request.readyState == 4)	//작업이 완료되면 실행.
+				/* innerHTML은 불러진 텍스트를 HTML형식으로 바꿔줌 */
+				/* view.innerHTML = request.responseText; */	 //새롭게 바뀜 
+				dialog.removeChild(img);
+				view.innerHTML = request.responseText;	//기존에 더하여 불러짐
+		};
+	}
+
+	window.addEventListener("load", function() {
+	/* var btnShowDlg = document.getElementById("btn-show-dlg"); */
+	/* 아이디를 선택하기 때문에 #을 사용한다 */
+	var btnShowDlg = document.querySelector("#btn-show-dlg");
+		btnShowDlg.onclick = function() {
+			/* showDialog("partial.html"); */
+			showDialog("partial1.jsp");
+		};
+	});
+
+</script>
+</head>
+<body id="body">
+	<input type="button" value="창 띄우기" id="btn-show-dlg">
+	<!-- 아래처럼 문서의 내용이 가득차 스크롤이 생길 경우 바디 범위에 문제가 생긴다. -->
+	<!-- position이 absolute이기 때문이다. 이를 fixed로 바꾸면 해결 -->
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/>
+</body>
+</html>

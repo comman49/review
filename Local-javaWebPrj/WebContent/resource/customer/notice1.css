@@ -1,0 +1,367 @@
+/* 공용으로 사용할 css */
+@IMPORT url("../css/reset.css");
+@IMPORT url("../css/style.css");
+
+/* 지역에 특화된 css */
+@IMPORT url("css/layout.css");
+@IMPORT url("css/style.css");
+
+
+/*-------------------- main-title 스타일 --------------------*/
+#main-title {
+   margin-top: 45px;
+   margin-left: 35px;
+   font-family: 맑은 고딕;
+   font-size: 21px;
+   font-weight: bold;
+   color: #646464;
+   padding-left: 25px;
+   background: url("../images/icon-title.png") no-repeat left center;
+   /* margin: 20px; */
+   float: left;
+}
+
+#main-title-root li {
+   margin-top: 55px;
+   padding-left: 10px;
+   float: left;
+   background: url("../images/icon-path.png") no-repeat left center;
+}
+
+#main-title-root li:FIRST-CHILD {
+   padding-left: 20px;
+   background: url("../images/icon-home.png") no-repeat left center;
+     
+}
+
+body {
+   font-family: 돋움, Arial, sans-serif;
+   font-size: 11px;
+   color: #979797;
+}
+
+#main-menu {
+   border: 1px solid red;
+   display: inline-block;
+}
+
+#main-menu li {
+   float: left;
+   padding-left: 24px;
+   background: url("../images/bg-main-menu-vsp.png") no-repeat left;
+}
+
+#main-menu li a {
+   font-family: 맑은 고딕;
+   font-size: 15px;
+   font-weight: bold;
+   color: #000000;
+   text-decoration: none;
+}
+
+#main-menu li:FIRST-CHILD {
+   padding-left: 0px;
+   background: none;
+}
+
+#main-menu li a:hover {
+   text-decoration: underline;
+}
+
+#member-menu li {
+   float: left;
+   padding-left: 9px;
+   background: url("../images/bg-main-menu-vsp.png") no-repeat left;
+   border: red solid 1px;
+}
+
+#member-menu li a {
+   font-family: 맑은 고딕;
+   font-size: 10px;
+   font-weight: bold;
+   color: #000000;
+   text-decoration: none;
+}
+
+#member-menu li:FIRST-CHILD {
+   padding-left: 0px;
+   background: none;
+}
+
+#member-menu li a:HOVER {
+   text-decoration: underline;
+}
+
+#customer-menu li {
+   float: left;
+}
+
+#lecture-search-form {
+   position: relative;
+   width: 222px;
+   height: 25px;
+   border: 5px solid #8cba34;
+   padding-left: 55px;
+   padding-right: 31px;
+}
+
+#lecture-search-form input[type="text"] {
+   width: 100%;
+   background: yellow;
+   height: 25px;
+   border: 0px;
+}
+
+#lecture-search-form input[type="submit"] {
+   position: absolute;
+   right: 0px;
+   top: 0px;
+   border: 1px solid #8cba34;
+}
+
+#lecture-search-form label {
+   width: 55px;
+   height: 25px;
+   line-height: 25px;
+   background: green;
+   display: inline-block;
+   position: absolute;
+   left: 0px;
+   top: 0px;
+   font-size: 11px;
+   text-align: center;
+   float: left;
+}
+
+
+/*-------------------- 공통 버튼 스타일 --------------------*/
+
+
+/*-------------------- 어사이드 --------------------*/
+
+#aside>h1 {
+   font-family: 맑은 고딕, 고딕, sans-serif;
+   font-size: 24px;
+   font-weight: bold;
+   color: #000;
+   margin-top: 43px;
+}
+
+.aside-menu-item li {
+   height: 26px;
+   line-height: 26px;
+   background: url("../images/bg-aside-menu-hsp.png") repeat-x left bottom;
+}
+
+.aside-menu-item li a {
+   font-family: 맑은 고딕;
+   font-weight: bold;
+   color: #808080;
+   padding-left: 26px;
+   text-decoration: none;
+}
+
+.aside-menu-item li:FIRST-CHILD {
+   padding-top: 45px;
+}
+
+.aside-menu-item li a:HOVER {
+   background: url("../images/iconCurrent.png") no-repeat 15px center;
+}
+
+.aside-menu-adv {
+   font-size: 14px;
+   font-family: 맑은 고딕;
+   font-weight: bold;
+   color: #000000;
+   padding-top: 40px;
+}
+
+.aside-menu-adv h1 {
+   background: url("../images/icon-favorite.png") no-repeat;
+   padding-left: 26px;
+}
+
+.aside-menu-adv h1: {
+   background: url("../images/icon-favorite.png") no-repeat;
+   padding-left: 26px;
+}
+
+
+
+/*-------------------- 공지사항 --------------------*/
+
+#notice {
+   margin-left: 30px;
+   width: 720px;
+   border-top: 2px #8cba35 solid;
+   border-collapse: collapse;
+   display: inline-block;
+}
+
+#notice th {
+   background: #f5f5f5 url("../images/bg-sp-title.png") no-repeat left
+      center;
+}
+
+#notice th:FIRST-CHILD {
+   background: #f5f5f5;
+}
+
+#notice tr {
+   height: 30px;
+   line-height: 30px;
+}
+
+#notice td, #notice th {
+   text-align: center;
+   /* vertical-align: middle; */
+   border-bottom: 1px #292929 solid;
+}
+
+#notice td:FIRST-CHILD,
+#notice th:FIRST-CHILD {
+   width: 60px;
+}
+
+#notice td:FIRST-CHILD+td,
+#notice th:FIRST-CHILD+th {
+   width: 400px;
+}
+
+#notice td:FIRST-CHILD+td {
+   text-align: left;
+   text-indent: 10px;
+}
+
+#notice td:FIRST-CHILD+td+td, #notice th:FIRST-CHILD+th+th {
+   width: 100px;
+}
+
+#notice td:FIRST-CHILD+td+td+td, #notice th:FIRST-CHILD+th+th+th {
+   width: 100px;
+}
+
+#notice td:FIRST-CHILD+td+td+td+td, #notice th:FIRST-CHILD+th+th+th+th {
+   width: 60px;
+}
+/* #notice a{
+	text-decoration: none;
+} */
+
+
+/*-------------------- 페이저 --------------------*/
+
+#page-info {
+   width: 720px;
+   margin-left: auto;
+   margin-right: auto;
+   display: inline-block;
+}
+
+#page {
+   width: 720px;
+   padding-top: 5px;
+   right: 0px;
+   float: left;
+   text-align: right;
+}
+
+#number {
+   display: inline-block;
+   margin-left: 280px;
+   margin-right: auto;
+}
+
+#number p {
+   width: 25px;
+   height: 25px;
+   float: left;
+   text-align: center; /* 수평정렬 */
+   line-height: 25px; /* 수직정렬 */
+}
+
+#number ul {
+   overflow: auto;
+   float: left;
+}
+
+#number li {
+   width: 25px;
+   height: 25px;
+   float: left;
+   text-align: center; /* 수평정렬 */
+   line-height: 25px; /* 수직정렬 */
+}
+
+#number a {
+   text-decoration: none;
+}
+
+#number a:HOVER {
+   text-decoration: underline;
+}
+
+#prev-button {
+   background: url("../images/btnPrev.png") no-repeat center;
+}
+
+#next-button {
+   background: url("../images/btnNext.png") no-repeat center;
+}
+/* -------------------------------------------- */
+.content-wrapper{
+   position: relative;
+}
+
+#header img {
+   position: absolute;
+   top: 23px;
+   left: 0px;
+}
+
+#main-menu {
+   position: absolute;
+   top: 27px;
+   left: 200px;
+}
+
+#lecture-search-form {
+   position: absolute;
+   top: 21px;
+   left: 468px;
+}
+
+#member-menu {
+   position: absolute;
+   top: 20px;
+   right: 0px;
+}
+
+#customer-menu {
+   position: absolute;
+   top: 40px;
+   right: 0px;
+}
+
+#main-title-root {
+   position: absolute;
+   right: 0px;
+}
+
+#notice-search-form {
+   position: absolute;
+   right: 0px;
+   top: 122px;
+}
+
+#notice {
+   position: absolute;
+   right: 0px;
+   top: 160px;
+}
+
+
+
+
+
